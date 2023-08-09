@@ -46,14 +46,14 @@ export function Trigger({
       value={value}
       {...props}
     >
-      <div>
+      <>
         {children}
         {participantsNumber && (
           <span className="ml-2 flex h-5 w-5 items-center justify-center rounded-full bg-dark-600">
             {participantsNumber}
           </span>
         )}
-      </div>
+      </>
     </TabsRadix.Trigger>
   )
 }
