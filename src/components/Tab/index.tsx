@@ -1,99 +1,59 @@
-'use client'
-
 import * as TabsRadix from '@radix-ui/react-tabs'
+
 import { X } from 'lucide-react'
 
 type RootProps = React.RefAttributes<HTMLDivElement> & TabsRadix.TabsProps
 
-export function Root(props: RootProps) {
+export function Root({ value, children, ...props }: RootProps) {
   return (
-    <TabsRadix.Root {...props}>
-      <TabsRadix.List>
-        <div className="flex w-[261px] items-center justify-between" {...props}>
-          {props.children}
-
-          <button
-            type="button"
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-dark-500 "
-          >
-            <X className="h-5 w-5 text-white" />
-          </button>
-        </div>
-      </TabsRadix.List>
+    <TabsRadix.Root className="grid gap-6" value={value} {...props}>
+      {children}
     </TabsRadix.Root>
   )
 }
 
-type ControlProps = React.ComponentProps<'div'>
+type ListProps = React.RefAttributes<HTMLDivElement> & TabsRadix.TabsListProps
 
-export function Control(props: ControlProps) {
+export function List({ children, ...props }: ListProps) {
   return (
-    <div
-      className="rounded-full border-2 border-dark-600 bg-dark-700 p-0.5"
+    <TabsRadix.List {...props}>
+      <div className="flex items-center justify-between rounded-full border-2 border-dark-600 bg-dark-700 p-0.5">
+        <div className="flex items-center justify-between gap-1">
+          {children}
+        </div>
+        <button className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-dark-600">
+          <X className="h-4 w-4 text-white" />
+        </button>
+      </div>
+    </TabsRadix.List>
+  )
+}
+
+type TriggerProps = React.RefAttributes<HTMLButtonElement> &
+  TabsRadix.TabsTriggerProps & {
+    participantsNumber?: number
+  }
+
+export function Trigger({
+  participantsNumber,
+  value,
+  children,
+  ...props
+}: TriggerProps) {
+  return (
+    <TabsRadix.Trigger
+      className="inline-flex rounded-full px-3 py-2 text-sm font-medium text-primary-gray data-[state=active]:bg-dark-600"
+      value={value}
       {...props}
     >
-      {props.children}
-    </div>
-  )
-}
-
-type TriggerProps = React.ComponentProps<'div'>
-
-export function Trigger(props: TriggerProps) {
-  return (
-    <div className="flex gap-1" {...props}>
-      {props.children}
-    </div>
-  )
-}
-
-type ItemProps = React.ComponentProps<'button'> & {
-  value: string
-  isActive?: boolean
-}
-
-export function Item({ isActive, value, ...props }: ItemProps) {
-  // if (isActive) {
-  //   return (
-  //     <button
-  //       type="button"
-  //       className="h-full rounded-full bg-dark-600 px-3 py-2 text-sm font-medium text-primary-gray"
-  //       {...props}
-  //     >
-  //       {props.children}
-  //     </button>
-  //   )
-  // } else {
-  //   return (
-  //     <button
-  //       type="button"
-  //       className="h-full rounded-full  px-3 py-2 text-sm font-medium text-primary-gray"
-  //       {...props}
-  //     >
-  //       {props.children}
-  //     </button>
-  //   )
-  // }
-
-  return (
-    <TabsRadix.Trigger value={value}>
-      {isActive ? (
-        <button
-          type="button"
-          className="h-full rounded-full bg-dark-600 px-3 py-2 text-sm font-medium text-primary-gray"
-          {...props}
-        >
-          {props.children}
-        </button>
-      ) : (
-        <button
-          type="button"
-          className="h-full rounded-full  px-3 py-2 text-sm font-medium text-primary-gray"
-          {...props}
-        >
-          {props.children}
-        </button>
-      )}
+      <div>
+        {children}
+        {participantsNumber && (
+          <span className="ml-2 flex h-5 w-5 items-center justify-center rounded-full bg-dark-600">
+            {participantsNumber}
+          </span>
+        )}
+      </div>
     </TabsRadix.Trigger>
   )
 }
@@ -104,22 +64,7 @@ type ContentProps = React.RefAttributes<HTMLDivElement> &
 export function Content({ value, children, ...props }: ContentProps) {
   return (
     <TabsRadix.Content value={value} {...props}>
-      {children}
+      <div className="w-full">{children}</div>
     </TabsRadix.Content>
-  )
-}
-
-type BadgeNumberProps = React.ComponentProps<'span'> & {
-  participantsNumber: number
-}
-
-export function BadgeNumber(props: BadgeNumberProps) {
-  return (
-    <span
-      className="ml-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-dark-600 text-sm font-medium text-primary-gray"
-      {...props}
-    >
-      {props.participantsNumber}
-    </span>
   )
 }
