@@ -1,12 +1,23 @@
 import * as TabsRadix from '@radix-ui/react-tabs'
-
 import { X } from 'lucide-react'
+import { twMerge } from 'tailwind-merge'
 
 type RootProps = React.RefAttributes<HTMLDivElement> & TabsRadix.TabsProps
 
-export function Root({ value, children, ...props }: RootProps) {
+export function Root({
+  value,
+  children,
+  className,
+  defaultValue,
+  ...props
+}: RootProps) {
   return (
-    <TabsRadix.Root className="grid gap-6" value={value} {...props}>
+    <TabsRadix.Root
+      className={twMerge('grid gap-6', className)}
+      value={value}
+      defaultValue={defaultValue}
+      {...props}
+    >
       {children}
     </TabsRadix.Root>
   )
