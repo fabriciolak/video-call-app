@@ -1,5 +1,6 @@
 import * as TabsRadix from '@radix-ui/react-tabs'
 import { X } from 'lucide-react'
+import { tw } from '@/lib/utils'
 import { twMerge } from 'tailwind-merge'
 
 type RootProps = React.RefAttributes<HTMLDivElement> & TabsRadix.TabsProps
@@ -13,7 +14,7 @@ export function Root({
 }: RootProps) {
   return (
     <TabsRadix.Root
-      className={twMerge('grid gap-6', className)}
+      className={tw('flex flex-col', className)}
       value={value}
       defaultValue={defaultValue}
       {...props}
@@ -72,10 +73,19 @@ export function Trigger({
 type ContentProps = React.RefAttributes<HTMLDivElement> &
   TabsRadix.TabsContentProps
 
-export function Content({ value, children, ...props }: ContentProps) {
+export function Content({
+  value,
+  children,
+  className,
+  ...props
+}: ContentProps) {
   return (
-    <TabsRadix.Content value={value} {...props}>
-      <div className="w-full">{children}</div>
+    <TabsRadix.Content
+      className={twMerge('h-full w-full bg-green p-2', className)}
+      value={value}
+      {...props}
+    >
+      <div>{children}</div>
     </TabsRadix.Content>
   )
 }
