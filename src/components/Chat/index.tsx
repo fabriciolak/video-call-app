@@ -5,7 +5,10 @@ type RootProps = React.ComponentProps<'div'>
 
 export function Root({ children, ...props }: RootProps) {
   return (
-    <div className="flex w-80 gap-2 p-1 [&:not(:first-child)]:mt-4" {...props}>
+    <div
+      className="flex w-full gap-2 p-1 [&:not(:first-child)]:mt-4"
+      {...props}
+    >
       {children}
     </div>
   )
