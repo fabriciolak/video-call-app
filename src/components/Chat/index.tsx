@@ -22,15 +22,14 @@ export function Control(props: ControlProps) {
 }
 
 type AboutProps = React.ComponentProps<'div'> & {
-  name: string
   lastSeen: string
 }
 
-export function About({ name, lastSeen, children, ...props }: AboutProps) {
+export function About({ lastSeen, children, ...props }: AboutProps) {
   return (
     <div className="flex h-11 items-center justify-between gap-2" {...props}>
       <p className="w-48 flex-1 truncate text-base font-medium text-primary-gray">
-        {name}
+        {children}
       </p>
       <span className="text-xs font-medium text-tertiary-gray">{lastSeen}</span>
     </div>
