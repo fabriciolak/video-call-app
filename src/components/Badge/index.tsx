@@ -1,18 +1,20 @@
+import * as React from 'react'
+import { darken } from 'polished'
 import { tw } from '@/lib/utils'
-import React from 'react'
 
 type RootProps = React.ComponentProps<'div'>
 
 export function Root(props: RootProps) {
   return (
-    <div
+    <span
       className={tw(
-        'inline-flex rounded-3xl px-6 py-2 text-xs font-semibold text-dark',
+        `rounded-3xl bg-red px-6 py-2 text-xs font-semibold`,
+        `text-[${darken(0.8, '#DBDBDB')}]`,
         props.className,
       )}
       {...props}
     >
       {props.children}
-    </div>
+    </span>
   )
 }
