@@ -8,7 +8,7 @@ export function Root(props: RootProps) {
   return (
     <span
       className={tw(
-        `rounded-3xl bg-red px-6 py-2 text-xs font-semibold`,
+        `rounded-3xl bg-red px-6 py-2 text-xs font-bold`,
         `text-[${darken(0.8, '#DBDBDB')}]`,
         props.className,
       )}
