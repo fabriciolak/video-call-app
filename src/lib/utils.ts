@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid'
-import { twMerge } from 'tailwind-merge'
+import { twMerge, type ClassNameValue } from 'tailwind-merge'
 
-export function tw(...className: string[]): string {
-  return twMerge(...className)
+export function tw(...className: ClassNameValue[]): string {
+  return twMerge(className)
 }
 
 export function generateUUID() {
